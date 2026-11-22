@@ -54,10 +54,8 @@ function openView(kind,id){
   cur={kind:kind,id:id};
   var title=s?(lang==='mk'?MKLABEL[s.id]||s.label:s.label):(lang==='mk'?e.mk:e.en);
   $('vTitle').textContent=title;
-  var h='<div class="pics">';
-  if(s)h+='<figure class="pic"><figcaption>'+T('In the church','Во црквата')+'</figcaption><button type="button" data-zoom="'+ch(s)+'"><img src="'+ch(s)+'" alt="'+esc(s.label)+' – from the iconostasis photo"></button></figure>';
-  if(e)h+='<figure class="pic"><figcaption>'+T('From the booklet','Од книшката')+'</figcaption><button type="button" data-zoom="'+bk(e)+'"><img src="'+bk(e)+'" alt="'+esc(e.en)+' – booklet icon"></button></figure>';
-  h+='</div>';
+  var src=e?bk(e):ch(s), alt=e?e.en+' – icon':s.label;
+  var h='<figure class="pic one"><button type="button" data-zoom="'+src+'" aria-label="'+T('Zoom','Зумирај')+'"><img src="'+src+'" alt="'+esc(alt)+'"></button></figure>';
   if(s&&s.note)h+='<p class="note">'+esc(s.note)+'</p>';
   if(e){
     if(lang!=='mk')h+=langBlock(e,'en');
