@@ -17,17 +17,25 @@ function applyStatic(){
   document.querySelectorAll('#langSeg button').forEach(function(b){b.classList.toggle('on',b.dataset.lang===lang)});
 }
 
-// Hotspots
-var stage=$('stage');
+// Hotspots: the photo is shown as three stacked sections (left, middle, right);
+// each hotspot's position in the full photo (%) is converted to % of its section.
+var SECTIONS=[{"id": "left", "x0": 0.0, "y0": 22.0068, "x1": 44.6, "y1": 81.984}, {"id": "middle", "x0": 42.2, "y0": 0.0, "x1": 59.2, "y1": 85.9749}, {"id": "right", "x0": 57.8, "y0": 22.0068, "x1": 100.0, "y1": 81.984}];
+function secFor(s){
+  var e=0.05,fit=SECTIONS.filter(function(c){return s.x>=c.x0-e&&s.y>=c.y0-e&&s.x+s.w<=c.x1+e&&s.y+s.h<=c.y1+e});
+  if(fit.length)return fit[0];
+  var cx=s.x+s.w/2;return SECTIONS.filter(function(c){return cx>=c.x0&&cx<=c.x1})[0]||SECTIONS[0];
+}
 SPOTS.forEach(function(s){
+  var c=secFor(s),W=c.x1-c.x0,H=c.y1-c.y0;
+  var x0=Math.max(s.x,c.x0),y0=Math.max(s.y,c.y0),x1=Math.min(s.x+s.w,c.x1),y1=Math.min(s.y+s.h,c.y1);
   var b=document.createElement('button');
-  b.className='hs';b.type='button';b.dataset.id=s.id;
-  b.style.left=s.x+'%';b.style.top=s.y+'%';b.style.width=s.w+'%';b.style.height=s.h+'%';
+  b.className='hs';b.type='button';b.dataset.id=s.id;b.dataset.sec=c.id;
+  b.style.left=((x0-c.x0)/W*100)+'%';b.style.top=((y0-c.y0)/H*100)+'%';b.style.width=((x1-x0)/W*100)+'%';b.style.height=((y1-y0)/H*100)+'%';
   b.setAttribute('aria-label',s.label);b.title=s.label;
   b.addEventListener('click',function(){b.classList.add('flash');setTimeout(function(){b.classList.remove('flash')},250);go('s/'+s.id)});
-  stage.appendChild(b);
+  $('stage-'+c.id).appendChild(b);
 });
-$('showOutlines').addEventListener('change',function(e){stage.classList.toggle('noline',!e.target.checked)});
+$('showOutlines').addEventListener('change',function(e){document.querySelectorAll('.stage').forEach(function(st){st.classList.toggle('noline',!e.target.checked)})});
 
 function renderList(){
   if(!$('list'))return;
