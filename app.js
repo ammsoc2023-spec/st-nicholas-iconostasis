@@ -111,5 +111,19 @@ $('langSeg').addEventListener('click',function(ev){var b=ev.target.closest('butt
 function renderAll(){applyStatic();renderList();renderDedication();if(cur)openView(cur.kind,cur.id)}
 renderAll();route();
 
-if('serviceWorker' in navigator&&location.protocol!=='file:'){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){})})}
+if('serviceWorker' in navigator&&location.protocol!=='file:'){
+  var hadController=!!navigator.serviceWorker.controller, reloaded=false;
+  navigator.serviceWorker.addEventListener('controllerchange',function(){
+    // a new version took over: reload once (not on the very first install, and never twice)
+    if(!hadController||reloaded)return;
+    if(sessionStorage.getItem('ico-reloaded')===String(Date.now()).slice(0,-4))return;
+    reloaded=true;sessionStorage.setItem('ico-reloaded',String(Date.now()).slice(0,-4));location.reload();
+  });
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(function(reg){
+      reg.update().catch(function(){});
+      document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible')reg.update().catch(function(){})});
+    }).catch(function(){});
+  });
+}
 })();
