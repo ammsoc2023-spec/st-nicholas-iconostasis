@@ -34,7 +34,7 @@ function addSpot(s,c){
   b.style.left=((x0-c.x0)/W*100)+'%';b.style.top=((y0-c.y0)/H*100)+'%';b.style.width=((x1-x0)/W*100)+'%';b.style.height=((y1-y0)/H*100)+'%';
   b.setAttribute('aria-label',s.label);b.title=s.label;
   b.addEventListener('click',function(){b.classList.add('flash');setTimeout(function(){b.classList.remove('flash')},250);go('s/'+s.id)});
-  $('stage-'+c.id).appendChild(b);
+  var st=$('stage-'+c.id);if(st)st.appendChild(b);
 }
 SPOTS.forEach(function(s){addSpot(s,FULL)});
 SPOTS.forEach(function(s){addSpot(s,secFor(s))});
