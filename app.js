@@ -4,7 +4,7 @@ var $=function(id){return document.getElementById(id)};
 var byId={};ENTRIES.forEach(function(e){byId[e.id]=e});
 var spotById={};SPOTS.forEach(function(s){spotById[s.id]=s});
 var ORDER=['topL','topR','apL1','apL2','apL3','apL4','apL5','apL6','trinity','apR1','apR2','apR3','apR4','apR5','apR6','wallL','michael','nicholas','theotokos','doors','christ','baptist','bishops','wallR','standL','standR'];
-var MKLABEL={apL1:'Св. Филип',apL2:'Св. Тома',apL3:'Св. Марко',apL4:'Св. Матеј',apL5:'Св. Андреј',apL6:'Св. Петар',apR1:'Св. Павле',apR2:'Св. Симон',apR3:'Св. Лука',apR4:'Св. Јован',apR5:'Св. Вартоломеј',apR6:'Св. Јаков',trinity:'Света Троица',topL:'Богородица под Крстот',topR:'Св. Јован под Крстот',michael:'Архангел Михаил',nicholas:'Св. Николај',theotokos:'Пресвета Богородица',doors:'Царски двери',christ:'Господ Исус Христос',baptist:'Св. Јован Крстител',standL:'Богородица (на столче)',standR:'Христос (на столче)',wallL:'Светец воин (лев ѕид)',wallR:'Светец воин (десен ѕид)',bishops:'Двајца свети архиереи (страничен ѕид)'};
+var MKLABEL={apL1:'Св. Филип',apL2:'Св. Тома',apL3:'Св. Марко',apL4:'Св. Матеј',apL5:'Св. Андреј',apL6:'Св. Петар',apR1:'Св. Павле',apR2:'Св. Симон',apR3:'Св. Лука',apR4:'Св. Јован',apR5:'Св. Вартоломеј',apR6:'Св. Јаков',trinity:'Света Троица',topL:'Пресвета Богородица',topR:'Свети Јован Богослов',michael:'Архангел Михаил',nicholas:'Св. Николај',theotokos:'Пресвета Богородица',doors:'Царски двери',christ:'Господ Исус Христос',baptist:'Св. Јован Крстител',standL:'Богородица (на столче)',standR:'Христос (на столче)',wallL:'Светец воин (лев ѕид)',wallR:'Светец воин (десен ѕид)',bishops:'Двајца свети архиереи (страничен ѕид)'};
 var lang=localStorage.getItem('ico-lang')||'both';
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
 function bk(e){return 'img/booklet/p'+String(e.page).padStart(2,'0')+'.jpg'}
@@ -54,7 +54,7 @@ function openView(kind,id){
   cur={kind:kind,id:id};
   var title=s?(lang==='mk'?MKLABEL[s.id]||s.label:s.label):(lang==='mk'?e.mk:e.en);
   $('vTitle').textContent=title;
-  var src=e?bk(e):ch(s), alt=e?e.en+' – icon':s.label;
+  var src=(s&&s.img)?s.img:(e?bk(e):ch(s)), alt=(s&&s.img)?s.label+' – icon':(e?e.en+' – icon':s.label);
   var h='<figure class="pic one"><button type="button" data-zoom="'+src+'" aria-label="'+T('Zoom','Зумирај')+'"><img src="'+src+'" alt="'+esc(alt)+'"></button></figure>';
   if(s&&s.note)h+='<p class="note">'+esc(s.note)+'</p>';
   if(e){
