@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Iconostasis – St Nicholas Bankstown</title>
+<meta name="description" content="The iconostasis of St Nicholas Orthodox Church Bankstown – tap any icon to read about it (EN / МК).">
+<meta name="theme-color" content="#7a1018">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Iconostasis">
+<meta name="application-name" content="Iconostasis">
+<meta name="format-detection" content="telephone=no">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon-180.png">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header id="top">
+  <div class="bar">
+    <div class="apptitle"><strong>Iconostasis</strong><span>St Nicholas Bankstown</span></div>
+    <div class="seg" id="langSeg" role="group" aria-label="Language">
+      <button type="button" data-lang="en">EN</button><button type="button" data-lang="mk">МК</button><button type="button" data-lang="both">EN+МК</button>
+    </div>
+  </div>
+</header>
+<main>
+  <p class="intro" data-en="Tap any outlined icon to open it." data-mk="Допрете ја секоја означена икона за да ја отворите."></p>
+  <div id="stage" class="stage">
+    <img id="photo" src="img/iconostasis.jpg" alt="The iconostasis of St Nicholas Orthodox Church, Bankstown" width="1500" height="877">
+  </div>
+  <label class="toggle"><input type="checkbox" id="showOutlines" checked> <span data-en="Show outlines" data-mk="Прикажи рамки"></span></label>
+
+  <h2 class="sec" data-en="All 20 booklet pages" data-mk="Сите 20 страници од книшката"></h2>
+  <ul id="list" class="list"></ul>
+
+  <h2 class="sec" data-en="Dedication" data-mk="Посвета"></h2>
+  <blockquote id="dedication" class="dedication"></blockquote>
+  <p class="foot">St Nicholas Orthodox Church Bankstown · <span data-en="Works offline after first open." data-mk="Работи без интернет по првото отворање."></span></p>
+</main>
+
+<div id="viewer" class="viewer" hidden role="dialog" aria-modal="true" aria-labelledby="vTitle">
+  <div class="vbar">
+    <button id="vClose" class="pill" type="button">&#8249; <span data-en="Back" data-mk="Назад"></span></button>
+    <span id="vTitle" class="vtitle"></span>
+    <span class="vnav"><button id="vPrev" class="arrow" type="button" aria-label="Previous">&#8249;</button><button id="vNext" class="arrow" type="button" aria-label="Next">&#8250;</button></span>
+  </div>
+  <div id="vBody" class="vbody"></div>
+</div>
+
+<div id="zoom" class="zoom" hidden role="dialog" aria-modal="true">
+  <button id="zClose" class="zclose" type="button" aria-label="Close">&#10005;</button>
+  <div id="zWrap" class="zwrap"><img id="zImg" alt=""></div>
+  <div class="zhint" data-en="Pinch or double-tap to zoom" data-mk="Раширете со прсти или допрете двапати за зумирање"></div>
+</div>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
