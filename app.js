@@ -30,13 +30,14 @@ SPOTS.forEach(function(s){
 $('showOutlines').addEventListener('change',function(e){stage.classList.toggle('noline',!e.target.checked)});
 
 function renderList(){
+  if(!$('list'))return;
   $('list').innerHTML=ENTRIES.map(function(e){
     var fd=e.feastEn?(lang==='mk'?e.feastMk:e.feastEn).replace(/^(Feast Day|Празник) \| /,''):'';
     var main=lang==='mk'?e.mk:e.en, sub=lang==='both'?e.mk:'';
     return '<li><button type="button" data-id="'+e.id+'"><span class="num">'+e.page+'</span><img loading="lazy" src="'+bk(e)+'" alt=""><span class="t"><span class="en">'+esc(main)+'</span>'+(sub?'<span class="mk">'+esc(sub)+'</span>':'')+(fd?'<span class="fd">'+esc(fd)+'</span>':'')+'</span></button></li>';
   }).join('');
 }
-$('list').addEventListener('click',function(ev){var b=ev.target.closest('button[data-id]');if(b)go('p/'+b.dataset.id)});
+if($('list'))$('list').addEventListener('click',function(ev){var b=ev.target.closest('button[data-id]');if(b)go('p/'+b.dataset.id)});
 
 function renderDedication(){$('dedication').innerHTML=esc(DEDICATION)+'<span class="d">'+esc(DEDICATION_DATE)+'</span>'}
 
