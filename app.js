@@ -25,8 +25,9 @@ function secFor(s){
   if(fit.length)return fit[0];
   var cx=s.x+s.w/2;return SECTIONS.filter(function(c){return cx>=c.x0&&cx<=c.x1})[0]||SECTIONS[0];
 }
-SPOTS.forEach(function(s){
-  var c=secFor(s),W=c.x1-c.x0,H=c.y1-c.y0;
+var FULL={id:'full',x0:0,y0:0,x1:100,y1:100};
+function addSpot(s,c){
+  var W=c.x1-c.x0,H=c.y1-c.y0;
   var x0=Math.max(s.x,c.x0),y0=Math.max(s.y,c.y0),x1=Math.min(s.x+s.w,c.x1),y1=Math.min(s.y+s.h,c.y1);
   var b=document.createElement('button');
   b.className='hs';b.type='button';b.dataset.id=s.id;b.dataset.sec=c.id;
@@ -34,7 +35,9 @@ SPOTS.forEach(function(s){
   b.setAttribute('aria-label',s.label);b.title=s.label;
   b.addEventListener('click',function(){b.classList.add('flash');setTimeout(function(){b.classList.remove('flash')},250);go('s/'+s.id)});
   $('stage-'+c.id).appendChild(b);
-});
+}
+SPOTS.forEach(function(s){addSpot(s,FULL)});
+SPOTS.forEach(function(s){addSpot(s,secFor(s))});
 $('showOutlines').addEventListener('change',function(e){document.querySelectorAll('.stage').forEach(function(st){st.classList.toggle('noline',!e.target.checked)})});
 
 function renderList(){
