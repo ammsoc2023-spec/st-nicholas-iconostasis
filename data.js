@@ -45,9 +45,13 @@ const SPOTS = [
   { id: "baptist", label: "St John the Baptist", x: 70.31, y: 41.74, w: 9.28, h: 25.38, ratio: "139/222", entry: "p05" },
   { id: "standL", label: "Theotokos (stand)", x: 16.8, y: 67.45, w: 7.42, h: 10.68, ratio: "112/94", entry: "p02", note: "Icon of the Theotokos on the left stand. The booklet's Theotokos page describes the enthroned icon on the iconostasis; its text is shown here." },
   { id: "standR", label: "Christ (stand)", x: 73.05, y: 67.45, w: 7.81, h: 12.02, ratio: "117/106", entry: "p01", note: "Icon of Christ on the right stand. The booklet's page on Our Lord describes the enthroned icon on the iconostasis; its text is shown here." },
-  { id: "wallL", label: "Warrior saint (left wall)", x: 0, y: 31.72, w: 6.25, h: 34.22, ratio: "93/300", note: "Wall painting of a warrior saint. Its inscription appears to end “of Solun”, which would suggest St Demetrius of Thessaloniki, but it is too small in the photo to read with certainty." },
+  { id: "wallL", label: "St Demetrius of Thessaloniki", x: 0, y: 31.72, w: 6.25, h: 34.22, ratio: "93/300",
+    info: { id: "demetrius", en: "Saint Demetrius of Thessaloniki", mk: "Свети Димитриј Солунски",
+      feastEn: "Feast Day | 8 November (26 October Old Style)", feastMk: "Празник | 8 ноември (26 октомври по стар стил)",
+      textEn: "Saint Demetrius is honoured in the Orthodox Church as a Great Martyr. He lived in Thessaloniki (Solun), confessed Christ openly, and was martyred there around the year 306 under the emperor Maximian. Because fragrant myrrh has flowed from his relics, the Church calls him the Myrrh-streamer. He is the patron saint of Thessaloniki and, like St George, is often painted as a warrior saint.",
+      textMk: "Свети Димитриј во Православната Црква се почитува како великомаченик. Живеел во Солун, отворено го исповедал Христа и пострадал таму околу 306 година, во времето на царот Максимијан. Бидејќи од неговите мошти истекувало миро, Црквата го нарекува Мироточив. Тој е заштитник на градот Солун и, како Свети Георгиј, често се слика како светец воин.",
+      noteEn: "Short description added for this app – not from the booklet.", noteMk: "Краток опис додаден за оваа апликација – не е од книшката." } },
   { id: "wallR", label: "Warrior saint (right wall)", x: 96, y: 31.72, w: 4, h: 31.72, ratio: "61/278", entry: "p07", note: "Only part of this wall painting is in the photo. It looks like the booklet's St George icon, so it is matched to that page, but this is a best guess." },
-  { id: "bishops", label: "Two holy bishops (side wall)", x: 82.32, y: 40.07, w: 5.08, h: 28.71, ratio: "77/252", note: "Wall painting of two hierarchs beside the deacon's door, seen at an angle." },
 ];
 
 const DEDICATION = "This has been produced to explain to our children, community members and those visiting our church the importance of each icon which makes up the Iconostasis of Saint Nicholas orthodox Church Bankstown under the guidance of Father Mitko Maceski by Professor Zoran Becvarovski";
@@ -75,5 +79,6 @@ p16:{id:'CEpyImRLFPU',en:'Life of St Luke the Evangelist',mk:'Житие на С
 p17:{id:'AbMZlo6KcJc',en:'Life of St John the Theologian',mk:'Житие на Свети Јован Богослов'},
 p18:{id:'SiebG9LgvDc',en:'Life of St Bartholomew the Apostle',mk:'Житие на Свети апостол Вартоломеј'},
 p19:{id:'xrMWAEyeDUw',en:'Life of St James the Apostle',mk:'Житие на Свети апостол Јаков'},
+demetrius:{id:'gMVC9Bih-4Q',en:'Life of St Demetrius of Thessaloniki',mk:'Житие на Свети Димитриј Солунски'},
 p20:{id:'YV5mFvbJoVk',en:'Life of St Luke of Crimea',mk:'Житие на Свети Лука Кримски'}
 };

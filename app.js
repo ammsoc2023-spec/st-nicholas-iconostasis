@@ -3,8 +3,8 @@
 var $=function(id){return document.getElementById(id)};
 var byId={};ENTRIES.forEach(function(e){byId[e.id]=e});
 var spotById={};SPOTS.forEach(function(s){spotById[s.id]=s});
-var ORDER=['topL','topR','apL1','apL2','apL3','apL4','apL5','apL6','trinity','apR1','apR2','apR3','apR4','apR5','apR6','wallL','michael','nicholas','theotokos','doors','christ','baptist','bishops','wallR','standL','standR'];
-var MKLABEL={apL1:'Св. Филип',apL2:'Св. Тома',apL3:'Св. Марко',apL4:'Св. Матеј',apL5:'Св. Андреј',apL6:'Св. Петар',apR1:'Св. Павле',apR2:'Св. Симон',apR3:'Св. Лука',apR4:'Св. Јован',apR5:'Св. Вартоломеј',apR6:'Св. Јаков',trinity:'Света Троица',topL:'Пресвета Богородица',topR:'Свети Јован Богослов',michael:'Архангел Михаил',nicholas:'Св. Николај',theotokos:'Пресвета Богородица',doors:'Царски двери',christ:'Господ Исус Христос',baptist:'Св. Јован Крстител',standL:'Богородица (на столче)',standR:'Христос (на столче)',wallL:'Светец воин (лев ѕид)',wallR:'Светец воин (десен ѕид)',bishops:'Двајца свети архиереи (страничен ѕид)'};
+var ORDER=['topL','topR','apL1','apL2','apL3','apL4','apL5','apL6','trinity','apR1','apR2','apR3','apR4','apR5','apR6','wallL','michael','nicholas','theotokos','doors','christ','baptist','wallR','standL','standR'];
+var MKLABEL={apL1:'Св. Филип',apL2:'Св. Тома',apL3:'Св. Марко',apL4:'Св. Матеј',apL5:'Св. Андреј',apL6:'Св. Петар',apR1:'Св. Павле',apR2:'Св. Симон',apR3:'Св. Лука',apR4:'Св. Јован',apR5:'Св. Вартоломеј',apR6:'Св. Јаков',trinity:'Света Троица',topL:'Пресвета Богородица',topR:'Свети Јован Богослов',michael:'Архангел Михаил',nicholas:'Св. Николај',theotokos:'Пресвета Богородица',doors:'Царски двери',christ:'Господ Исус Христос',baptist:'Св. Јован Крстител',standL:'Богородица (на столче)',standR:'Христос (на столче)',wallL:'Свети Димитриј Солунски',wallR:'Светец воин (десен ѕид)'};
 var lang=localStorage.getItem('ico-lang')||'both';
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
 function bk(e){return 'img/booklet/p'+String(e.page).padStart(2,'0')+'.jpg'}
@@ -14,6 +14,7 @@ function T(en,mk){return lang==='mk'?mk:(lang==='en'?en:en)}
 function applyStatic(){
   document.documentElement.lang=lang==='mk'?'mk':'en';
   document.querySelectorAll('[data-en]').forEach(function(el){el.textContent=lang==='mk'?el.dataset.mk:el.dataset.en});
+  document.querySelectorAll('.hs').forEach(function(b){var s=spotById[b.dataset.id];if(!s)return;var t=lang==='mk'?(MKLABEL[s.id]||s.label):s.label;b.title=t;b.setAttribute('aria-label',t)});
   document.querySelectorAll('#langSeg button').forEach(function(b){b.classList.toggle('on',b.dataset.lang===lang)});
 }
 
@@ -62,16 +63,18 @@ var cur=null; // {kind:'s'|'p', id}
 function openView(kind,id){
   var s=kind==='s'?spotById[id]:null;
   var e=kind==='s'?(s&&s.entry?byId[s.entry]:null):byId[id];
+  if(!e&&s&&s.info)e=s.info;
   if(!s&&!e){closeView();return}
   cur={kind:kind,id:id};
   var title=s?(lang==='mk'?MKLABEL[s.id]||s.label:s.label):(lang==='mk'?e.mk:e.en);
   $('vTitle').textContent=title;
-  var src=(s&&s.img)?s.img:(e?bk(e):ch(s)), alt=(s&&s.img)?s.label+' – icon':(e?e.en+' – icon':s.label);
+  var src=(s&&s.img)?s.img:(e&&e.page?bk(e):ch(s)), alt=(s&&s.img)?s.label+' – icon':(e?e.en+' – icon':s.label);
   var h='<figure class="pic one"><button type="button" data-zoom="'+src+'" aria-label="'+T('Zoom','Зумирај')+'"><img src="'+src+'" alt="'+esc(alt)+'"></button></figure>';
   if(s&&s.note)h+='<p class="note">'+esc(s.note)+'</p>';
   if(e){
     if(lang!=='mk')h+=langBlock(e,'en');
     if(lang!=='en')h+=langBlock(e,'mk');
+    if(e.noteEn)h+='<p class="meta">'+(lang==='mk'?esc(e.noteMk):esc(e.noteEn)+(lang==='en'?'':'<br>'+esc(e.noteMk)))+'</p>';
     if(!s&&e.where)h+='<p class="meta">'+T('On the iconostasis: ','На иконостасот: ')+esc(e.where)+'</p>';
     var v=(typeof VIDEOS!=='undefined')&&VIDEOS[e.id];
     if(v){
