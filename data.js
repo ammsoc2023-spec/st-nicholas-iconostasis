@@ -75,7 +75,7 @@ p12:{id:'ZYozoS-8QbE',en:'Life of St Andrew the First-Called',mk:'Житие н�
 p13:{id:'OGinTeWyAyA',en:'Homily on Sts Peter and Paul',mk:'Проповед за Светите апостоли Петар и Павле'},
 p14:{id:'OGinTeWyAyA',en:'Homily on Sts Peter and Paul',mk:'Проповед за Светите апостоли Петар и Павле'},
 p16:{id:'CEpyImRLFPU',en:'Life of St Luke the Evangelist',mk:'Житие на Свети апостол Лука'},
-p08:{id:'ZVi_nOsRROg',en:'Life of St Philip the Apostle',mk:'Житие на Свети апостол Филип'}, // kept
+p08:{id:'IVz8GTIXNqs',en:'Life of St Philip the Apostle',mk:'Житие на Свети апостол Филип'}, // Ancient Faith
 p11:{id:'8sMtZKNZr5o',en:'Life of St Matthew the Apostle and Evangelist',mk:'Житие на Свети апостол и евангелист Матеј'}, // kept
 p15:{id:'Y--LHqL1S28',en:'Life of St Simon the Zealot',mk:'Житие на Свети апостол Симон Зилот'}, // kept
 p17:{id:'AbMZlo6KcJc',en:'Life of St John the Theologian',mk:'Житие на Свети Јован Богослов'}, // kept
