@@ -58,27 +58,29 @@ const DEDICATION = "This has been produced to explain to our children, community
 const DEDICATION_DATE = "December 1 2026";
 const CHURCH = "St Nicholas Orthodox Church Bankstown";
 
-// English-language Eastern Orthodox videos (opened in a new tab / the YouTube app; never embedded)
+// English-language videos, preferably from Patristic Nectar Publications (main channel and its official
+// "Patristic Nectar Family" kids' channel) only, as requested. Opened in a new tab / the YouTube app; never embedded.
+// Where neither source has a suitable video, the earlier verified Orthodox video is kept (marked 'kept').
 var VIDEOS={
-p01:{id:'3PqGxWHi6b0',en:'The Real Jesus – Fr Thomas Hopko',mk:'Вистинскиот Исус – о. Томас Хопко'},
-p02:{id:'32VxHyLnNsk',en:'The Nativity of the Most Holy Theotokos',mk:'Раѓање на Пресвета Богородица'},
-p03:{id:'vda8bFCGY9Y',en:'Holy Pentecost – Feast of the Holy Trinity',mk:'Педесетница – празник на Света Троица'},
-p04:{id:'9pYlcsVCBEE',en:'Life of St Nicholas the Wonderworker',mk:'Житие на Свети Николај Чудотворец'},
-p05:{id:'XAi9e5C3iCE',en:'Life of St John the Forerunner and Baptist',mk:'Житие на Свети Јован Претеча и Крстител'},
-p06:{id:'0qE5k0uw_Y0',en:'Synaxis of the Holy Archangel Michael',mk:'Собор на Свети Архангел Михаил'},
-p07:{id:'O8HlQDqB4Pc',en:'Life of St George the Great Martyr',mk:'Житие на Свети Георгиј Великомаченик'},
-p08:{id:'ZVi_nOsRROg',en:'Life of St Philip the Apostle',mk:'Житие на Свети апостол Филип'},
-p09:{id:'Jjq2C728Mus',en:'Life of St Thomas the Apostle',mk:'Житие на Свети апостол Тома'},
-p10:{id:'QvTKl53cu-M',en:'Life of St Mark the Evangelist',mk:'Житие на Свети апостол Марко'},
-p11:{id:'8sMtZKNZr5o',en:'Life of St Matthew the Apostle and Evangelist',mk:'Житие на Свети апостол и евангелист Матеј'},
-p12:{id:'ZYozoS-8QbE',en:'Life of St Andrew the First-Called',mk:'Житие на Свети апостол Андреј Првоповикан'},
-p13:{id:'ETq0-A93J2k',en:'Life of Sts Peter and Paul',mk:'Житие на Светите апостоли Петар и Павле'},
-p14:{id:'ETq0-A93J2k',en:'Life of Sts Peter and Paul',mk:'Житие на Светите апостоли Петар и Павле'},
-p15:{id:'Y--LHqL1S28',en:'Life of St Simon the Zealot',mk:'Житие на Свети апостол Симон Зилот'},
-p16:{id:'CEpyImRLFPU',en:'Life of St Luke the Evangelist',mk:'Житие на Свети апостол Лука'},
-p17:{id:'AbMZlo6KcJc',en:'Life of St John the Theologian',mk:'Житие на Свети Јован Богослов'},
-p18:{id:'SiebG9LgvDc',en:'Life of St Bartholomew the Apostle',mk:'Житие на Свети апостол Вартоломеј'},
-p19:{id:'xrMWAEyeDUw',en:'Life of St James the Apostle',mk:'Житие на Свети апостол Јаков'},
-demetrius:{id:'gMVC9Bih-4Q',en:'Life of St Demetrius of Thessaloniki',mk:'Житие на Свети Димитриј Солунски'},
-p20:{id:'YV5mFvbJoVk',en:'Life of St Luke of Crimea',mk:'Житие на Свети Лука Кримски'}
+p01:{id:'1MQ18O6-jk8',en:'Homily on Christ: “The Real Jesus”',mk:'Проповед за Христос: „Вистинскиот Исус“'},
+p02:{id:'Sf6mHHuYmP8',en:'Homily on the spiritual life of the Theotokos',mk:'Проповед за духовниот живот на Пресвета Богородица'},
+p03:{id:'z9QPyYh91A8',en:'Homily on Pentecost – Feast of the Holy Trinity',mk:'Проповед за Педесетница – празник на Света Троица'},
+p04:{id:'T9yXj4jmstw',en:'The story of St Nicholas and his feast-day traditions (for children)',mk:'Приказната за Свети Николај и обичаите за неговиот празник (за деца)'},
+p05:{id:'InHlYElVDzI',en:'Homily on St John the Baptist, “The Greatest Man”',mk:'Проповед за Свети Јован Крстител, „Најголемиот човек“'},
+p06:{id:'nTLQ8q2E3HU',en:'Talk on the nine orders of angels',mk:'Беседа за деветте ангелски чинови'},
+p07:{id:'LSPD9M-09xg',en:'Life of St George (children’s storytime)',mk:'Житие на Свети Георгиј (приказна за деца)'},
+p09:{id:'IkyX0Qyv9AA',en:'Life of St Thomas the Apostle (children’s storytime)',mk:'Житие на Свети апостол Тома (приказна за деца)'},
+p10:{id:'lQbiWyqjrbI',en:'Homily on the feast of St Mark the Evangelist',mk:'Проповед на празникот на Свети апостол Марко'},
+p12:{id:'aDZFmLeLfOw',en:'Life of St Andrew the First-Called, part 1 (for children)',mk:'Житие на Свети апостол Андреј Првоповикан, 1 дел (за деца)'},
+p13:{id:'UjFpAtShpV0',en:'Life of St Peter the Apostle (children’s storytime)',mk:'Житие на Свети апостол Петар (приказна за деца)'},
+p14:{id:'xy0RdYhqCAw',en:'Life of St Paul the Apostle (children’s storytime)',mk:'Житие на Свети апостол Павле (приказна за деца)'},
+p16:{id:'8_PWk-z0R0o',en:'Life of St Luke the Evangelist (children’s art lesson)',mk:'Житие на Свети апостол Лука (ликовна работилница за деца)'},
+p08:{id:'ZVi_nOsRROg',en:'Life of St Philip the Apostle',mk:'Житие на Свети апостол Филип'}, // kept
+p11:{id:'8sMtZKNZr5o',en:'Life of St Matthew the Apostle and Evangelist',mk:'Житие на Свети апостол и евангелист Матеј'}, // kept
+p15:{id:'Y--LHqL1S28',en:'Life of St Simon the Zealot',mk:'Житие на Свети апостол Симон Зилот'}, // kept
+p17:{id:'AbMZlo6KcJc',en:'Life of St John the Theologian',mk:'Житие на Свети Јован Богослов'}, // kept
+p18:{id:'SiebG9LgvDc',en:'Life of St Bartholomew the Apostle',mk:'Житие на Свети апостол Вартоломеј'}, // kept
+p19:{id:'xrMWAEyeDUw',en:'Life of St James the Apostle',mk:'Житие на Свети апостол Јаков'}, // kept
+p20:{id:'YV5mFvbJoVk',en:'Life of St Luke of Crimea',mk:'Житие на Свети Лука Кримски'}, // kept
+demetrius:{id:'fLNRp3fUo7I',en:'Life of St Demetrius (children’s storytime)',mk:'Житие на Свети Димитриј (приказна за деца)'}
 };
