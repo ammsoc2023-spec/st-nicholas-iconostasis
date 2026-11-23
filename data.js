@@ -53,3 +53,27 @@ const SPOTS = [
 const DEDICATION = "This has been produced to explain to our children, community members and those visiting our church the importance of each icon which makes up the Iconostasis of Saint Nicholas orthodox Church Bankstown under the guidance of Father Mitko Maceski by Professor Zoran Becvarovski";
 const DEDICATION_DATE = "December 1 2026";
 const CHURCH = "St Nicholas Orthodox Church Bankstown";
+
+// English-language Eastern Orthodox videos (opened in a new tab / the YouTube app; never embedded)
+var VIDEOS={
+p01:{id:'3PqGxWHi6b0',en:'The Real Jesus – Fr Thomas Hopko',mk:'Вистинскиот Исус – о. Томас Хопко'},
+p02:{id:'32VxHyLnNsk',en:'The Nativity of the Most Holy Theotokos',mk:'Раѓање на Пресвета Богородица'},
+p03:{id:'vda8bFCGY9Y',en:'Holy Pentecost – Feast of the Holy Trinity',mk:'Педесетница – празник на Света Троица'},
+p04:{id:'9pYlcsVCBEE',en:'Life of St Nicholas the Wonderworker',mk:'Житие на Свети Николај Чудотворец'},
+p05:{id:'XAi9e5C3iCE',en:'Life of St John the Forerunner and Baptist',mk:'Житие на Свети Јован Претеча и Крстител'},
+p06:{id:'0qE5k0uw_Y0',en:'Synaxis of the Holy Archangel Michael',mk:'Собор на Свети Архангел Михаил'},
+p07:{id:'O8HlQDqB4Pc',en:'Life of St George the Great Martyr',mk:'Житие на Свети Георгиј Великомаченик'},
+p08:{id:'ZVi_nOsRROg',en:'Life of St Philip the Apostle',mk:'Житие на Свети апостол Филип'},
+p09:{id:'Jjq2C728Mus',en:'Life of St Thomas the Apostle',mk:'Житие на Свети апостол Тома'},
+p10:{id:'QvTKl53cu-M',en:'Life of St Mark the Evangelist',mk:'Житие на Свети апостол Марко'},
+p11:{id:'8sMtZKNZr5o',en:'Life of St Matthew the Apostle and Evangelist',mk:'Житие на Свети апостол и евангелист Матеј'},
+p12:{id:'ZYozoS-8QbE',en:'Life of St Andrew the First-Called',mk:'Житие на Свети апостол Андреј Првоповикан'},
+p13:{id:'ETq0-A93J2k',en:'Life of Sts Peter and Paul',mk:'Житие на Светите апостоли Петар и Павле'},
+p14:{id:'ETq0-A93J2k',en:'Life of Sts Peter and Paul',mk:'Житие на Светите апостоли Петар и Павле'},
+p15:{id:'Y--LHqL1S28',en:'Life of St Simon the Zealot',mk:'Житие на Свети апостол Симон Зилот'},
+p16:{id:'CEpyImRLFPU',en:'Life of St Luke the Evangelist',mk:'Житие на Свети апостол Лука'},
+p17:{id:'AbMZlo6KcJc',en:'Life of St John the Theologian',mk:'Житие на Свети Јован Богослов'},
+p18:{id:'SiebG9LgvDc',en:'Life of St Bartholomew the Apostle',mk:'Житие на Свети апостол Вартоломеј'},
+p19:{id:'xrMWAEyeDUw',en:'Life of St James the Apostle',mk:'Житие на Свети апостол Јаков'},
+p20:{id:'YV5mFvbJoVk',en:'Life of St Luke of Crimea',mk:'Житие на Свети Лука Кримски'}
+};

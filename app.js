@@ -72,7 +72,13 @@ function openView(kind,id){
   if(e){
     if(lang!=='mk')h+=langBlock(e,'en');
     if(lang!=='en')h+=langBlock(e,'mk');
-    h+='<p class="meta">'+T('Booklet page ','Страница од книшката ')+e.page+' / 20'+(s?'':' · '+T('On the iconostasis: ','На иконостасот: ')+esc(e.where))+'</p>';
+    if(!s&&e.where)h+='<p class="meta">'+T('On the iconostasis: ','На иконостасот: ')+esc(e.where)+'</p>';
+    var v=(typeof VIDEOS!=='undefined')&&VIDEOS[e.id];
+    if(v){
+      var ven='Watch: '+v.en+' (video)', vmk='Видео (на англиски): '+v.mk;
+      h+='<a class="vlink" href="https://www.youtube.com/watch?v='+v.id+'" target="_blank" rel="noopener"><span class="vplay" aria-hidden="true">▶</span><span class="vtxt">'+
+        (lang==='mk'?'<span lang="mk">'+esc(vmk)+'</span>':'<span>'+esc(ven)+'</span>'+(lang==='en'?'':'<small lang="mk">'+esc(vmk)+'</small>'))+'</span></a>';
+    }
   } else {
     h+='<div class="noentry">'+T('No booklet entry for this icon.','Нема запис во книшката за оваа икона.')+'</div>';
   }

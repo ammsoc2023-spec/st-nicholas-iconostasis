@@ -66,3 +66,9 @@ h2.sec{font-size:1em;margin:1.6em 0 .4em;letter-spacing:.04em;text-transform:upp
 .pic.one img{width:auto;max-width:100%;max-height:68vh;margin:0 auto;background:none;box-shadow:0 2px 12px rgba(0,0,0,.25)}
 .seclbl{margin:1.3em 0 .35em;font-size:.78em;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:center}
 .stage+.toggle{margin-top:.8em}
+
+.vlink{display:flex;align-items:center;gap:.75em;margin:1.4em 0 .6em;padding:.85em 1em;border-radius:12px;background:#7a1018;color:#fff;text-decoration:none;font-weight:600;line-height:1.3;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.vlink:active{transform:scale(.99);opacity:.92}
+.vplay{flex:0 0 auto;width:2.1em;height:2.1em;border-radius:50%;background:#fff;color:#c4302b;display:flex;align-items:center;justify-content:center;font-size:.95em;padding-left:.15em}
+.vtxt{display:flex;flex-direction:column;gap:.2em}
+.vtxt small{font-weight:500;opacity:.9;font-size:.85em}
