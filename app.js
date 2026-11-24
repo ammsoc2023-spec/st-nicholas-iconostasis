@@ -104,27 +104,39 @@ function openView(kind,id){
   $('vTitle').textContent=title;
   var src=(s&&s.img)?s.img:(e&&e.page?bk(e):ch(s)), alt=(s&&s.img)?s.label+' – icon':(e?e.en+' – icon':s.label);
   var h='<figure class="pic one"><button type="button" data-zoom="'+src+'" aria-label="'+T('Zoom','Зумирај')+'"><img src="'+src+'" alt="'+esc(alt)+'"></button></figure>';
-  if(s&&s.note)h+='<p class="note">'+esc(s.note)+'</p>';
-  if(e){
-    if(lang!=='mk')h+=langBlock(e,'en');
-    if(lang!=='en')h+=langBlock(e,'mk');
-    if(e.noteEn)h+='<p class="meta">'+(lang==='mk'?esc(e.noteMk):esc(e.noteEn)+(lang==='en'?'':'<br>'+esc(e.noteMk)))+'</p>';
-    if(!s&&e.where)h+='<p class="meta">'+T('On the iconostasis: ','На иконостасот: ')+esc(e.where)+'</p>';
-    var mm=(typeof MORE!=='undefined')&&MORE[e.id];
-    if(mm)h+=youthHtml(mm)+moreHtml(mm);
-    var v=(typeof VIDEOS!=='undefined')&&VIDEOS[e.id];
-    if(v){
-      var ven='Watch: '+v.en+' (video)', vmk='Видео (на англиски): '+v.mk;
-      h+='<a class="vlink" href="https://www.youtube.com/watch?v='+v.id+'" target="_blank" rel="noopener"><span class="vplay" aria-hidden="true">▶</span><span class="vtxt">'+
-        (lang==='mk'?'<span lang="mk">'+esc(vmk)+'</span>':'<span>'+esc(ven)+'</span>'+(lang==='en'?'':'<small lang="mk">'+esc(vmk)+'</small>'))+'</span></a>';
+  function block(){
+    var h='';
+    if(s&&s.note&&lang!=='mk')h+='<p class="note">'+esc(s.note)+'</p>';
+    if(e){
+      if(lang!=='mk')h+=langBlock(e,'en');
+      if(lang!=='en')h+=langBlock(e,'mk');
+      if(e.noteEn)h+='<p class="meta">'+(lang==='mk'?esc(e.noteMk):esc(e.noteEn)+(lang==='en'?'':'<br>'+esc(e.noteMk)))+'</p>';
+      if(!s&&e.where)h+='<p class="meta">'+T('On the iconostasis: ','На иконостасот: ')+esc(e.where)+'</p>';
+      var mm=(typeof MORE!=='undefined')&&MORE[e.id];
+      if(mm)h+=youthHtml(mm)+moreHtml(mm);
+      var v=(typeof VIDEOS!=='undefined')&&VIDEOS[e.id];
+      if(v){
+        var ven='Watch: '+v.en+' (video)', vmk='Видео (на англиски): '+v.mk;
+        h+='<a class="vlink" href="https://www.youtube.com/watch?v='+v.id+'" target="_blank" rel="noopener"><span class="vplay" aria-hidden="true">▶</span><span class="vtxt">'+
+          (lang==='mk'?'<span lang="mk">'+esc(vmk)+'</span>':'<span>'+esc(ven)+'</span>'+(lang==='en'?'':'<small lang="mk">'+esc(vmk)+'</small>'))+'</span></a>';
+      }
+    } else {
+      h+='<div class="noentry">'+T('No booklet entry for this icon.','Нема запис во книшката за оваа икона.')+'</div>';
+      var md=(typeof MORE!=='undefined')&&s&&MORE[s.id];
+      if(md)h+=youthHtml(md)+moreHtml(md);
     }
-  } else {
-    h+='<div class="noentry">'+T('No booklet entry for this icon.','Нема запис во книшката за оваа икона.')+'</div>';
-    var md=(typeof MORE!=='undefined')&&s&&MORE[s.id];
-    if(md)h+=youthHtml(md)+moreHtml(md);
+    return h;
   }
+  if(lang==='both'){
+    var saved=lang;
+    try{
+      lang='en';h+='<div class="lblock" lang="en"><h2 class="lhead">English</h2>'+block()+'</div>';
+      lang='mk';h+='<div class="lblock lblock-mk" lang="mk"><h2 class="lhead">Македонски</h2>'+block()+'</div>';
+    } finally {lang=saved;}
+  } else h+=block();
   $('vBody').innerHTML=h;$('vBody').scrollTop=0;
-  var dm=$('vBody').querySelector('details.more');if(dm)dm.addEventListener('toggle',function(){localStorage.setItem('ico-more-open',dm.open?'1':'0')});
+  var dms=[].slice.call($('vBody').querySelectorAll('details.more'));
+  dms.forEach(function(dm){dm.addEventListener('toggle',function(){localStorage.setItem('ico-more-open',dm.open?'1':'0');dms.forEach(function(o){if(o!==dm&&o.open!==dm.open)o.open=dm.open})})});
   var seq=kind==='s'?ORDER:ENTRIES.map(function(x){return x.id});
   var i=seq.indexOf(id);
   $('vPrev').disabled=i<=0;$('vNext').disabled=i>=seq.length-1;
