@@ -72,3 +72,34 @@ h2.sec{font-size:1em;margin:1.6em 0 .4em;letter-spacing:.04em;text-transform:upp
 .vplay{flex:0 0 auto;width:2.1em;height:2.1em;border-radius:50%;background:#fff;color:#c4302b;display:flex;align-items:center;justify-content:center;font-size:.95em;padding-left:.15em}
 .vtxt{display:flex;flex-direction:column;gap:.2em}
 .vtxt small{font-weight:500;opacity:.9;font-size:.85em}
+
+.youth{margin:1.4em 0 .4em;padding:1em 1.05em .6em;border-radius:14px;background:#fbf4e6;border:1px solid #e8d6b0;border-left:4px solid #b8862b}
+.youth h2{font-size:1.08em;margin:0 0 .25em;color:#7a1018;line-height:1.3}
+.youth p{margin:.55em 0;line-height:1.55}
+.youth .take{font-weight:700;color:#5a3b0a}
+.youth .take::before{content:"→ "}
+.added{color:var(--muted);font-size:.8em;margin:.15em 0 .5em!important;font-style:italic}
+.mkpart{margin-top:.9em;padding-top:.7em;border-top:1px dashed #d9c49a}
+.bimk{display:block;font-size:.85em;font-weight:500;opacity:.85}
+.more{margin:1.1em 0 .4em;border:1px solid var(--line);border-radius:14px;background:#fff;overflow:hidden}
+.more>summary{cursor:pointer;list-style:none;padding:.85em 1em;font-weight:700;color:#7a1018;background:#f6efe9;position:relative;padding-right:2.4em}
+.more>summary::-webkit-details-marker{display:none}
+.more>summary::after{content:"▾";position:absolute;right:1em;top:.8em;transition:transform .2s}
+.more:not([open])>summary::after{transform:rotate(-90deg)}
+.morebody{padding:.6em 1em 1em}
+.morebody p{line-height:1.55;margin:.6em 0}
+.mfeast{font-weight:600;color:#5b4636}
+.trop{margin-top:1em;padding:.8em .9em;border-radius:10px;background:#f7f3ee}
+.trop h3{margin:0 0 .3em;font-size:1em;color:#7a1018}
+.trop .tt{font-style:italic;margin:.4em 0}
+.trop .src{font-size:.78em;color:var(--muted);margin:.25em 0 .6em}
+@media (prefers-color-scheme:dark){
+.youth{background:#2a2216;border-color:#4a3b22;border-left-color:#c99a3d}
+.youth h2,.more>summary,.trop h3{color:#f0b0a0}
+.youth .take{color:#e8c98a}
+.more{background:var(--card)}
+.more>summary{background:#2a201c}
+.trop{background:#24201c}
+.mfeast{color:#d9c6b0}
+.mkpart{border-top-color:#4a3b22}
+}

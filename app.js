@@ -59,6 +59,40 @@ function langBlock(e,which){
   return '<section class="lang" lang="'+(en?'en':'mk')+'"><h1>'+esc(title)+'</h1>'+(feast?'<p class="feast">'+esc(feast)+'</p>':'')+'<p class="txt">'+esc(txt)+'</p></section>';
 }
 
+function paras(a){return a.map(function(p){return '<p>'+esc(p)+'</p>'}).join('')}
+function bi(en,mk,tag){tag=tag||'span';
+  if(lang==='en')return esc(en);
+  if(lang==='mk')return '<'+tag+' lang="mk">'+esc(mk)+'</'+tag+'>';
+  return esc(en)+'<small class="bimk" lang="mk">'+esc(mk)+'</small>';}
+var ADDED_EN='Added for this app – not from the booklet.', ADDED_MK='Додадено за оваа апликација – не е од книшката.';
+function addedNote(){return '<p class="added">'+(lang==='mk'?esc(ADDED_MK):esc(ADDED_EN)+(lang==='en'?'':' / <span lang="mk">'+esc(ADDED_MK)+'</span>'))+'</p>'}
+function tropLines(t){return esc(t).replace(/\n/g,'<br>')}
+function youthHtml(m){var y=m.youth;if(!y)return '';
+  var h='<section class="youth"><h2>'+bi(y.titleEn,y.titleMk)+'</h2>'+addedNote();
+  if(lang!=='mk')h+='<div lang="en">'+paras(y.en)+'<p class="take">'+esc(y.takeEn)+'</p></div>';
+  if(lang!=='en')h+='<div lang="mk"'+(lang==='both'?' class="mkpart"':'')+'>'+paras(y.mk)+'<p class="take">'+esc(y.takeMk)+'</p></div>';
+  return h+'</section>';}
+function moreHtml(m){
+  var open=localStorage.getItem('ico-more-open')==='1';
+  var h='<details class="more"'+(open?' open':'')+'><summary>'+bi('More about this icon','Повеќе за оваа икона')+'</summary><div class="morebody">'+addedNote();
+  if(lang!=='mk')h+='<div lang="en">'+paras(m.en)+(m.feastEn?'<p class="mfeast">'+esc(m.feastEn)+'</p>':'')+'</div>';
+  if(lang!=='en')h+='<div lang="mk"'+(lang==='both'?' class="mkpart"':'')+'>'+paras(m.mk)+(m.feastMk?'<p class="mfeast">'+esc(m.feastMk)+'</p>':'')+'</div>';
+  var t=m.trop;
+  if(t){
+    h+='<div class="trop"><h3>'+bi('Troparion (Tone '+t.tone+')','Тропар (глас '+((lang==='mk'&&t.mk)?t.mkTone:t.tone)+')')+'</h3>';
+    var showEn=lang!=='mk'||!t.mk, showMk=lang!=='en'&&t.mk;
+    if(showEn)h+='<p class="tt" lang="en">'+tropLines(t.en)+'</p><p class="src">'+(lang==='mk'?'Извор (англиски): ':'Source: ')+esc(t.enSrc)+'</p>';
+    if(showMk){
+      if(lang==='both'&&t.diff)h+='<p class="src">The Macedonian Menaion gives a different troparion (Tone '+t.mkTone+') for this day: <span lang="mk">Во македонскиот Минеј за овој ден стои друг тропар (глас '+t.mkTone+'):</span></p>';
+      else if(lang==='both')h+='<p class="src" lang="mk">Тропар (глас '+t.mkTone+'), на македонски:</p>';
+      h+='<p class="tt" lang="mk">'+esc(t.mk)+'</p><p class="src" lang="mk">Извор: '+esc(t.mkSrc)+'</p>';
+    }
+    if(!t.mk&&lang!=='en')h+='<p class="src" lang="mk">Не најдовме автентичен македонски црковен текст на овој тропар, па е прикажан само англискиот.</p>';
+    if(!t.mk&&lang==='both')h+='<p class="src">No authentic Macedonian church text of this troparion was found, so only the English is shown.</p>';
+    h+='</div>';
+  }
+  return h+'</div></details>';}
+
 var cur=null; // {kind:'s'|'p', id}
 function openView(kind,id){
   var s=kind==='s'?spotById[id]:null;
@@ -76,6 +110,8 @@ function openView(kind,id){
     if(lang!=='en')h+=langBlock(e,'mk');
     if(e.noteEn)h+='<p class="meta">'+(lang==='mk'?esc(e.noteMk):esc(e.noteEn)+(lang==='en'?'':'<br>'+esc(e.noteMk)))+'</p>';
     if(!s&&e.where)h+='<p class="meta">'+T('On the iconostasis: ','На иконостасот: ')+esc(e.where)+'</p>';
+    var mm=(typeof MORE!=='undefined')&&MORE[e.id];
+    if(mm)h+=youthHtml(mm)+moreHtml(mm);
     var v=(typeof VIDEOS!=='undefined')&&VIDEOS[e.id];
     if(v){
       var ven='Watch: '+v.en+' (video)', vmk='Видео (на англиски): '+v.mk;
@@ -84,8 +120,11 @@ function openView(kind,id){
     }
   } else {
     h+='<div class="noentry">'+T('No booklet entry for this icon.','Нема запис во книшката за оваа икона.')+'</div>';
+    var md=(typeof MORE!=='undefined')&&s&&MORE[s.id];
+    if(md)h+=youthHtml(md)+moreHtml(md);
   }
   $('vBody').innerHTML=h;$('vBody').scrollTop=0;
+  var dm=$('vBody').querySelector('details.more');if(dm)dm.addEventListener('toggle',function(){localStorage.setItem('ico-more-open',dm.open?'1':'0')});
   var seq=kind==='s'?ORDER:ENTRIES.map(function(x){return x.id});
   var i=seq.indexOf(id);
   $('vPrev').disabled=i<=0;$('vNext').disabled=i>=seq.length-1;
